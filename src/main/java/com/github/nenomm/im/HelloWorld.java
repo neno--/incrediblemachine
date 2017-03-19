@@ -12,6 +12,8 @@ public class HelloWorld {
 		Greeter greeter = new Greeter();
 		System.out.println(greeter.sayHello());
 
-		ApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "test.xml" });
+		ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"main.xml"});
+
+		Greeter fromSpring = (Greeter) context.getBean("greeter");
 	}
 }
