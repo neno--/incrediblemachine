@@ -10,4 +10,14 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="greeter" class="com.github.nenomm.im.Greeter">
 
     </bean>
+
+    <bean id="greeterByStaticFactory"
+          class="com.github.nenomm.im.Greeter"
+          factory-method="createInstance"/>
+
+    <bean id="greeterFactory" class="com.github.nenomm.im.GreeterFactory"/>
+
+    <bean id="greeterByInstanceFactory"
+          factory-bean="greeterFactory"
+          factory-method="createInstance"/>
 </beans>
