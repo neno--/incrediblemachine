@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="collaborators.xml"/>
+    <import resource="classpath_fun/more_collaborators.xml"/>
+
+
+    <bean id="someGuy" class="com.github.nenomm.im.Greeter">
+        <property name="friend">
+            <ref bean="greeter"/>
+        </property>
+    </bean>
+
+    <bean id="otherGuy" class="com.github.nenomm.im.Greeter">
+        <property name="number" value="42"/>
+    </bean>
+
+    <bean id="guyForMap" class="com.github.nenomm.im.Greeter">
+        <property name="aMap">
+            <map>
+                <entry key="2" value="22"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="foreverALone" class="com.github.nenomm.im.Greeter">
+        <property name="friend">
+            <null/>
+        </property>
+    </bean>
+
+    <bean id="needyGuy" class="com.github.nenomm.im.Greeter" depends-on="greeter">
+    </bean>
+
+    <bean id="lazyGuy" class="com.github.nenomm.im.Greeter" lazy-init="true">
+    </bean>
+</beans>

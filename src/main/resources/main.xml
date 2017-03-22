@@ -6,6 +6,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <import resource="collaborators.xml"/>
     <import resource="classpath_fun/more_collaborators.xml"/>
+    <import resource="property_injection.xml"/>
 
     <bean id="greeter" class="com.github.nenomm.im.Greeter">
 
