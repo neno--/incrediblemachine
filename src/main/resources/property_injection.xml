@@ -37,4 +37,14 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="lazyGuy" class="com.github.nenomm.im.Greeter" lazy-init="true">
     </bean>
+
+    <bean id="autowireTalker" class="com.github.nenomm.im.Talker" autowire="byName">
+    </bean>
+
+    <bean id="newGreeter" class="com.github.nenomm.im.Greeter" scope="prototype">
+    </bean>
+
+    <bean id="talkerWithDifferentGreaters" class="com.github.nenomm.im.Talker">
+        <lookup-method name="createNewGreeterEveryTime" bean="newGreeter"/>
+    </bean>
 </beans>
