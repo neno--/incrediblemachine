@@ -47,4 +47,12 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="talkerWithDifferentGreaters" class="com.github.nenomm.im.Talker">
         <lookup-method name="createNewGreeterEveryTime" bean="newGreeter"/>
     </bean>
+
+    <!-- this becomes problematic only when you inject it somewhere, and the context is not web app context. -->
+    <bean id="transientGreeter" class="com.github.nenomm.im.Greeter" scope="session">
+    </bean>
+
+    <!-- bean id="needsSessionGreeter" class="com.github.nenomm.im.Greeter">
+        <property name="friend" ref="transientGreeter" />
+    </bean -->
 </beans>
