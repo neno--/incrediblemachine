@@ -2,11 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans.xsd">
+http://www.springframework.org/schema/beans/spring-beans.xsd" default-init-method="supercalifragilisticexpialidocious">
 
     <import resource="collaborators.xml"/>
     <import resource="classpath_fun/more_collaborators.xml"/>
     <import resource="property_injection.xml"/>
+    <import resource="initialization.xml"/>
 
     <bean id="greeter" class="com.github.nenomm.im.Greeter">
 

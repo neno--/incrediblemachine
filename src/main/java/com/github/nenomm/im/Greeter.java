@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//https://docs.spring.io/spring/docs/4.3.7.RELEASE/spring-framework-reference/htmlsingle/#beans-factory-lifecycle-initializingbean
 public class Greeter {
 	static Logger logger = LoggerFactory.getLogger(Greeter.class);
 	private Greeter greeter;
