@@ -15,6 +15,7 @@ public class HelloWorld {
 
 		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"main.xml"});
 
+		// activates lifecycle management of important object
 		context.registerShutdownHook();
 
 		Greeter fromSpring = (Greeter) context.getBean("greeter");
