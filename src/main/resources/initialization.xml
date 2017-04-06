@@ -23,4 +23,5 @@
 
     <!-- turn on configuration annotation and the like -->
     <context:component-scan base-package="com.github.nenomm.im.annotation"/>
+    <context:component-scan base-package="com.github.nenomm.im.environment"/>
 </beans>

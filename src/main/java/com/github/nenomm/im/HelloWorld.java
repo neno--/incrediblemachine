@@ -22,6 +22,9 @@ public class HelloWorld {
 
 		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main.xml" });
 
+		context.getEnvironment().setActiveProfiles("dev");
+		context.refresh();
+
 		// activates lifecycle management of important object
 		context.registerShutdownHook();
 
