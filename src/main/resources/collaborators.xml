@@ -7,4 +7,16 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="anotherGreeter" class="com.github.nenomm.im.Greeter">
 
     </bean>
+
+    <beans>
+        <bean id="messageSource"
+              class="org.springframework.context.support.ResourceBundleMessageSource">
+            <property name="basenames">
+                <list>
+                    <value>classpath_fun.first</value>
+                    <value>classpath_fun.second</value>
+                </list>
+            </property>
+        </bean>
+    </beans>
 </beans>

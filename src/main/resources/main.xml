@@ -5,7 +5,7 @@
 http://www.springframework.org/schema/beans/spring-beans.xsd" default-init-method="supercalifragilisticexpialidocious">
 
     <import resource="collaborators.xml"/>
-    <import resource="classpath_fun/more_collaborators.xml"/>
+    <import resource="classpath:classpath_fun/more_collaborators.xml"/>
     <import resource="property_injection.xml"/>
     <import resource="initialization.xml"/>
 

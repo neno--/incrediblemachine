@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -29,6 +30,10 @@ public class HelloWorld {
 		context.registerShutdownHook();
 
 		Greeter fromSpring = (Greeter) context.getBean("greeter");
+
+		MessageSource messageSource = (MessageSource) context;
+
+		logger.info("{}", messageSource.getMessage("greeting", new String[] { "8472" }, null));
 
 		ApplicationContext ctx1 = new AnnotationConfigApplicationContext(AppConfig.class);
 		logger.info("Got strange one: {}", ctx1.getBean("strange"));
