@@ -32,5 +32,12 @@ public class HelloWorld {
 
 		ApplicationContext ctx1 = new AnnotationConfigApplicationContext(AppConfig.class);
 		logger.info("Got strange one: {}", ctx1.getBean("strange"));
+
+		if (ctx1.getEnvironment().containsProperty("OS")) {
+			logger.info("running on windows");
+		}
+		else if (ctx1.getEnvironment().containsProperty("SHELL")) {
+			logger.info("running on linux");
+		}
 	}
 }
