@@ -3,6 +3,9 @@ package com.github.nenomm.im;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.PropertyValue;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.MessageSource;
@@ -10,6 +13,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.github.nenomm.im.another.AppConfig;
+import com.github.nenomm.im.validation.Person;
+import com.github.nenomm.im.validation.PersonValidator;
+import org.springframework.validation.ValidationUtils;
 
 public class HelloWorld {
 	static Logger logger = LoggerFactory.getLogger(HelloWorld.class);
@@ -44,5 +50,24 @@ public class HelloWorld {
 		else if (ctx1.getEnvironment().containsProperty("SHELL")) {
 			logger.info("running on linux");
 		}
+
+		validationTesting();
 	}
+
+	private static void validationTesting() {
+		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "validation.xml" });
+
+		Person person = (Person) context.getBean("person");
+		PersonValidator personValidator = (PersonValidator) context.getBean("validator");
+
+		BeanWrapper wrapped = new BeanWrapperImpl(person);
+		wrapped.setPropertyValue(new PropertyValue("age", 22));
+
+		person.getAge();
+
+		Person another = (Person) context.getBean("anotherPerson");
+		another.getFriend().getName();
+
+	}
+
 }
