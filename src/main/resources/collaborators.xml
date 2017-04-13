@@ -8,6 +8,10 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     </bean>
 
+    <bean id="resourceConsumer" class="com.github.nenomm.im.ResourceConsumer">
+        <property name="resource3" value="classpath:classpath_fun/my.properties"/>
+    </bean>
+
     <beans>
         <bean id="messageSource"
               class="org.springframework.context.support.ResourceBundleMessageSource">
