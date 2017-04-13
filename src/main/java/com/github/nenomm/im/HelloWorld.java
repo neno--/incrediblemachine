@@ -15,6 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.github.nenomm.im.another.AppConfig;
 import com.github.nenomm.im.validation.Person;
 import com.github.nenomm.im.validation.PersonValidator;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.validation.ValidationUtils;
 
 public class HelloWorld {
@@ -51,11 +52,13 @@ public class HelloWorld {
 			logger.info("running on linux");
 		}
 
-		validationTesting();
+		ConfigurableApplicationContext validationContext = new ClassPathXmlApplicationContext(new String[] { "validation.xml" });
+		validationTesting(validationContext);
+		conversionTesting(validationContext);
 	}
 
-	private static void validationTesting() {
-		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "validation.xml" });
+	private static void validationTesting(ConfigurableApplicationContext context) {
+
 
 		Person person = (Person) context.getBean("person");
 		PersonValidator personValidator = (PersonValidator) context.getBean("validator");
@@ -67,7 +70,12 @@ public class HelloWorld {
 
 		Person another = (Person) context.getBean("anotherPerson");
 		another.getFriend().getName();
+	}
 
+	private static void conversionTesting(ConfigurableApplicationContext context) {
+		ConversionService service = (ConversionService) context.getBean("conversionService");
+		Person mrMbar = service.convert("Mr.Bar/22", Person.class);
+		mrMbar.getName();
 	}
 
 }

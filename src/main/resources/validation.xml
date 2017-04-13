@@ -20,4 +20,14 @@ http://www.springframework.org/schema/beans/spring-beans.xsd" default-init-metho
 
     <bean id="validator" class="com.github.nenomm.im.validation.PersonValidator">
     </bean>
+
+    <!-- conversionService is expected by spring -->
+    <bean id="conversionService"
+          class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.github.nenomm.im.validation.converter.StringToPersonConverter"/>
+            </set>
+        </property>
+    </bean>
 </beans>
