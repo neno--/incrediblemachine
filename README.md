@@ -24,3 +24,8 @@ http://www.codingpedia.org/ama/how-to-log-in-spring-with-slf4j-and-logback/
 gradle dsl reference for my version of gradle:
 https://docs.gradle.org/2.8/dsl/
 
+spring API reference
+https://docs.spring.io/spring/docs/4.3.7.RELEASE/javadoc-api/
+
+reference
+https://docs.spring.io/spring/docs/4.3.7.RELEASE/spring-framework-reference/html/

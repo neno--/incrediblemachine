@@ -11,12 +11,13 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.convert.ConversionService;
 
 import com.github.nenomm.im.another.AppConfig;
+import com.github.nenomm.im.scopes.NeedyObject;
+import com.github.nenomm.im.scopes.TransientCollaborator;
 import com.github.nenomm.im.validation.Person;
 import com.github.nenomm.im.validation.PersonValidator;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.validation.ValidationUtils;
 
 public class HelloWorld {
 	static Logger logger = LoggerFactory.getLogger(HelloWorld.class);
@@ -52,13 +53,17 @@ public class HelloWorld {
 			logger.info("running on linux");
 		}
 
-		ConfigurableApplicationContext validationContext = new ClassPathXmlApplicationContext(new String[] { "validation.xml" });
+		ConfigurableApplicationContext validationContext = new ClassPathXmlApplicationContext(
+				new String[] { "validation.xml" });
 		validationTesting(validationContext);
 		conversionTesting(validationContext);
+
+		ConfigurableApplicationContext scopesContext = new ClassPathXmlApplicationContext(
+				new String[] { "scopes.xml" });
+		scopesTesting(scopesContext);
 	}
 
 	private static void validationTesting(ConfigurableApplicationContext context) {
-
 
 		Person person = (Person) context.getBean("person");
 		PersonValidator personValidator = (PersonValidator) context.getBean("validator");
@@ -76,6 +81,33 @@ public class HelloWorld {
 		ConversionService service = (ConversionService) context.getBean("conversionService");
 		Person mrMbar = service.convert("Mr.Bar/22", Person.class);
 		mrMbar.getName();
+	}
+
+	private static void scopesTesting(ConfigurableApplicationContext context) {
+		NeedyObject first = (NeedyObject) context.getBean("firstNeedy");
+		NeedyObject second = (NeedyObject) context.getBean("secondNeedy");
+		TransientCollaborator collaborator1 = first.getCollaborator();
+		TransientCollaborator collaborator2 = second.getCollaborator();
+
+		boolean theSame = first.getCollaborator() == second.getCollaborator();
+
+		context.refresh();
+
+		NeedyObject newFirst = (NeedyObject) context.getBean("firstNeedy");
+		NeedyObject newSecond = (NeedyObject) context.getBean("secondNeedy");
+
+		assert first != newFirst;
+		assert first.getCollaborator() == collaborator1;
+		assert newFirst.getCollaborator() != collaborator1;
+		// on context refresh beans are reinitialized! - see
+		// http://docs.spring.io/spring/docs/2.5.6/javadoc-api/org/springframework/context/ConfigurableApplicationContext.html#refresh%28%29
+
+		first = (NeedyObject) context.getBean("first");
+		second = (NeedyObject) context.getBean("second");
+		NeedyObject third = (NeedyObject) context.getBean("third");
+
+		assert first.getCollaborator() == second.getCollaborator();
+		assert second.getCollaborator() != third.getCollaborator();
 	}
 
 }

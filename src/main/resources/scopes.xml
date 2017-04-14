@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd" default-init-method="supercalifragilisticexpialidocious">
+
+    <bean id="firstNeedy" class="com.github.nenomm.im.scopes.NeedyObject">
+        <property name="collaborator" ref="collaborator"/>
+    </bean>
+
+    <bean id="secondNeedy" class="com.github.nenomm.im.scopes.NeedyObject">
+        <property name="collaborator" ref="collaborator"/>
+    </bean>
+
+    <bean id="collaborator" class="com.github.nenomm.im.scopes.TransientCollaborator" scope="prototype">
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+        <property name="scopes">
+            <map>
+                <entry key="twoTimer">
+                    <bean class="com.github.nenomm.im.scopes.TwoTimerScope"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="collaborator2" class="com.github.nenomm.im.scopes.TransientCollaborator" scope="twoTimer">
+    </bean>
+
+    <bean id="first" class="com.github.nenomm.im.scopes.NeedyObject">
+        <property name="collaborator" ref="collaborator2"/>
+    </bean>
+
+    <bean id="second" class="com.github.nenomm.im.scopes.NeedyObject">
+        <property name="collaborator" ref="collaborator2"/>
+    </bean>
+
+    <bean id="third" class="com.github.nenomm.im.scopes.NeedyObject">
+        <property name="collaborator" ref="collaborator2"/>
+    </bean>
+
+
+</beans>
