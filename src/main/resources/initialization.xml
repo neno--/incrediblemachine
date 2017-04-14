@@ -14,6 +14,9 @@
         <property name="fortyTwo" value="${some.property}"/>
     </bean>
 
+    <!--<bean id="simpleGreeter" class="com.github.nenomm.im.validation.SimpleGreeter">
+    </bean>-->
+
     <bean class="com.github.nenomm.im.BeanProcessor"/>
 
     <context:property-placeholder location="classpath:classpath_fun/my.properties"/>
