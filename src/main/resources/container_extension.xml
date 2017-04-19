@@ -6,4 +6,8 @@ http://www.springframework.org/schema/beans/spring-beans.xsd" default-init-metho
 
     <bean id="myProcessor" class="com.github.nenomm.im.containerextension.postprocessors.MyPostProcessor">
     </bean>
+
+    <bean id="myBeanFactoryPostProcessor"
+          class="com.github.nenomm.im.containerextension.postprocessors.MyBeanFactoryPostProcessor">
+    </bean>
 </beans>
