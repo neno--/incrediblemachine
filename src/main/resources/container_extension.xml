@@ -10,4 +10,8 @@ http://www.springframework.org/schema/beans/spring-beans.xsd" default-init-metho
     <bean id="myBeanFactoryPostProcessor"
           class="com.github.nenomm.im.containerextension.postprocessors.MyBeanFactoryPostProcessor">
     </bean>
+
+    <bean id="contextEventSnitch"
+          class="com.github.nenomm.im.containerextension.listener.ContextEventSnitch">
+    </bean>
 </beans>
