@@ -8,6 +8,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd" default-init-metho
     <import resource="classpath:classpath_fun/more_collaborators.xml"/>
     <import resource="property_injection.xml"/>
     <import resource="initialization.xml"/>
+    <import resource="container_extension.xml"/>
 
     <bean id="greeter" class="com.github.nenomm.im.Greeter">
 
