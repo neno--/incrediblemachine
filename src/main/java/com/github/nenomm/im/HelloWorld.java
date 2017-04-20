@@ -17,6 +17,8 @@ import com.github.nenomm.im.another.AppConfig;
 import com.github.nenomm.im.aop.PoorLittleObject;
 import com.github.nenomm.im.scopes.NeedyObject;
 import com.github.nenomm.im.scopes.TransientCollaborator;
+import com.github.nenomm.im.tx.MyService;
+import com.github.nenomm.im.tx.MyServiceException;
 import com.github.nenomm.im.validation.Person;
 import com.github.nenomm.im.validation.PersonValidator;
 
@@ -66,6 +68,10 @@ public class HelloWorld {
 		ConfigurableApplicationContext aopContext = new ClassPathXmlApplicationContext(
 				new String[] { "aop.xml" });
 		aopTesting(aopContext);
+
+		ConfigurableApplicationContext txContext = new ClassPathXmlApplicationContext(
+				new String[] { "transactions.xml" });
+		txTesting(txContext);
 	}
 
 	private static void validationTesting(ConfigurableApplicationContext context) {
@@ -118,6 +124,19 @@ public class HelloWorld {
 	private static void aopTesting(ConfigurableApplicationContext context) {
 		PoorLittleObject littleOne = (PoorLittleObject) context.getBean("littleOne");
 		littleOne.helpMe();
+	}
+
+	private static void txTesting(ConfigurableApplicationContext context) {
+		MyService myService = (MyService) context.getBean("myService");
+
+		logger.info("Number of users is: {}", myService.getNumberOfUsers());
+		try {
+			myService.playAroundWithTx();
+		}
+		catch (MyServiceException e) {
+			logger.warn("Exception caught.", e);
+		}
+		logger.info("Third count: {}", myService.getNumberOfUsers());
 	}
 
 }
