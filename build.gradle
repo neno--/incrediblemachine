@@ -9,18 +9,29 @@ targetCompatibility = 1.7
 
 dependencies {
     compile "joda-time:joda-time:2.2"
-    compile ("org.springframework:spring-context:4.3.7.RELEASE") {
+
+    compile("org.springframework:spring-context:4.3.7.RELEASE") {
         exclude group: "commons-logging"
     }
     compile "ch.qos.logback:logback-classic:1.2.2"
     compile "org.slf4j:jcl-over-slf4j:1.7.25"
 
+    compile "org.springframework:spring-context-support:4.3.7.RELEASE"
 
+    // compile "org.springframework:spring-aop:4.3.7.RELEASE"
+    // compile "org.springframework:spring-aspects:4.3.7.RELEASE"
+    // https://mvnrepository.com/artifact/org.aspectj/aspectjrt
+    //compile "org.aspectj:aspectjweaver:1.6.11"
+    //compile group: 'org.aspectj', name: 'aspectjlib', version: '1.6.2'
+    //compile group: 'org.aspectj', name: 'aspectjtools', version: '1.8.10'
+    // compile group: 'org.aspectj', name: 'aspectjrt', version: '1.8.10'
+
+    compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.7.4'
 }
 
 jar {
     baseName = 'incrediblemachine'
-    version =  '0.1.0'
+    version = '0.1.0'
 }
 
 apply plugin: 'application'

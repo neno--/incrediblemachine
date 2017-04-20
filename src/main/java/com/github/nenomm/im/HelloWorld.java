@@ -14,6 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.convert.ConversionService;
 
 import com.github.nenomm.im.another.AppConfig;
+import com.github.nenomm.im.aop.PoorLittleObject;
 import com.github.nenomm.im.scopes.NeedyObject;
 import com.github.nenomm.im.scopes.TransientCollaborator;
 import com.github.nenomm.im.validation.Person;
@@ -61,6 +62,10 @@ public class HelloWorld {
 		ConfigurableApplicationContext scopesContext = new ClassPathXmlApplicationContext(
 				new String[] { "scopes.xml" });
 		scopesTesting(scopesContext);
+
+		ConfigurableApplicationContext aopContext = new ClassPathXmlApplicationContext(
+				new String[] { "aop.xml" });
+		aopTesting(aopContext);
 	}
 
 	private static void validationTesting(ConfigurableApplicationContext context) {
@@ -108,6 +113,11 @@ public class HelloWorld {
 
 		assert first.getCollaborator() == second.getCollaborator();
 		assert second.getCollaborator() != third.getCollaborator();
+	}
+
+	private static void aopTesting(ConfigurableApplicationContext context) {
+		PoorLittleObject littleOne = (PoorLittleObject) context.getBean("littleOne");
+		littleOne.helpMe();
 	}
 
 }
