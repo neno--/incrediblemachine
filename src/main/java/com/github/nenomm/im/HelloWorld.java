@@ -15,6 +15,7 @@ import org.springframework.core.convert.ConversionService;
 
 import com.github.nenomm.im.another.AppConfig;
 import com.github.nenomm.im.aop.PoorLittleObject;
+import com.github.nenomm.im.jdbc.namedparamjdbc.SomeDaoImproved;
 import com.github.nenomm.im.jdbc.simplejdbc.SomeDao;
 import com.github.nenomm.im.scopes.NeedyObject;
 import com.github.nenomm.im.scopes.TransientCollaborator;
@@ -77,6 +78,10 @@ public class HelloWorld {
 		ConfigurableApplicationContext simpleJdbcContext = new ClassPathXmlApplicationContext(
 				new String[] { "simple_jdbc.xml" });
 		simpleJdbcTesting(simpleJdbcContext);
+
+		ConfigurableApplicationContext namedJdbcTesting = new ClassPathXmlApplicationContext(
+				new String[] { "named_jdbc.xml" });
+		namedJdbcTesting(namedJdbcTesting);
 	}
 
 	private static void validationTesting(ConfigurableApplicationContext context) {
@@ -149,6 +154,11 @@ public class HelloWorld {
 		someDao.getUserName(2);
 		someDao.findUser(2);
 		someDao.findUsers();
+	}
+
+	private static void namedJdbcTesting(ConfigurableApplicationContext context) {
+		SomeDaoImproved someDaoImproved = (SomeDaoImproved) context.getBean("someDaoImproved");
+		someDaoImproved.getUserName(2);
 	}
 
 }
