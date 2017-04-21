@@ -17,6 +17,7 @@ import com.github.nenomm.im.another.AppConfig;
 import com.github.nenomm.im.aop.PoorLittleObject;
 import com.github.nenomm.im.jdbc.namedparamjdbc.SomeDaoImproved;
 import com.github.nenomm.im.jdbc.simplejdbc.SomeDao;
+import com.github.nenomm.im.jdbc.simplejdbc.User;
 import com.github.nenomm.im.scopes.NeedyObject;
 import com.github.nenomm.im.scopes.TransientCollaborator;
 import com.github.nenomm.im.tx.MyService;
@@ -159,6 +160,9 @@ public class HelloWorld {
 	private static void namedJdbcTesting(ConfigurableApplicationContext context) {
 		SomeDaoImproved someDaoImproved = (SomeDaoImproved) context.getBean("someDaoImproved");
 		someDaoImproved.getUserName(2);
+		User user = new User();
+		user.setName("test");
+		someDaoImproved.insertUser(user);
 	}
 
 }
