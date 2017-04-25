@@ -23,7 +23,7 @@ public class SomeDaoImproved {
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-		this.simpleInsert = new SimpleJdbcInsert(dataSource).usingColumns("users");
+		this.simpleInsert = new SimpleJdbcInsert(dataSource).withTableName("users");
 	}
 
 	public String getUserName(long id) {
