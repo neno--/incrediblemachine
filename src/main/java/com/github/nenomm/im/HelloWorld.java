@@ -1,5 +1,6 @@
 package com.github.nenomm.im;
 
+import com.github.nenomm.im.jdbc.sqlquery.AdvancedDao;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,6 +84,10 @@ public class HelloWorld {
 		ConfigurableApplicationContext namedJdbcTesting = new ClassPathXmlApplicationContext(
 				new String[] { "named_jdbc.xml" });
 		namedJdbcTesting(namedJdbcTesting);
+
+		ConfigurableApplicationContext advancedQueryTesting = new ClassPathXmlApplicationContext(
+				new String[] { "advanced_query.xml" });
+		advancedQueryTesting(advancedQueryTesting);
 	}
 
 	private static void validationTesting(ConfigurableApplicationContext context) {
@@ -163,6 +168,11 @@ public class HelloWorld {
 		User user = new User();
 		user.setName("test");
 		someDaoImproved.insertUser(user);
+	}
+
+	private static void advancedQueryTesting(ConfigurableApplicationContext context) {
+		AdvancedDao advancedDao = (AdvancedDao) context.getBean("advancedDao");
+		advancedDao.getUserName(2);
 	}
 
 }
