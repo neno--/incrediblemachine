@@ -15,7 +15,7 @@ public class TxConfig {
 	public DataSource dataSource() {
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 		EmbeddedDatabase db = builder
-				.setType(EmbeddedDatabaseType.HSQL)
+				.setType(EmbeddedDatabaseType.HSQL).generateUniqueName(true)
 				.addScript("classpath:sql/create-db.sql")
 				.addScript("classpath:sql/insert-data.sql")
 				.build();

@@ -1,5 +1,7 @@
 package com.github.nenomm.im.jdbc.namedparamjdbc;
 
+import java.beans.PropertyVetoException;
+
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
@@ -10,17 +12,15 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import java.beans.PropertyVetoException;
-
 @Configuration
 public class NamedParamJdbcConfig {
 	@Bean
 	public DataSource dataSource1() {
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 		EmbeddedDatabase db = builder
-				.setType(EmbeddedDatabaseType.HSQL)
-				// .addScript("classpath:sql/create-db.sql")
-				// .addScript("classpath:sql/insert-data.sql")
+				.setType(EmbeddedDatabaseType.HSQL).generateUniqueName(true)
+				.addScript("classpath:sql/create-db.sql")
+				.addScript("classpath:sql/insert-data.sql")
 				.build();
 		return db;
 	}
