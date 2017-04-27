@@ -29,3 +29,8 @@ https://docs.spring.io/spring/docs/4.3.7.RELEASE/javadoc-api/
 
 reference
 https://docs.spring.io/spring/docs/4.3.7.RELEASE/spring-framework-reference/html/
+
+hibernate 5.1 resources
+https://docs.jboss.org/hibernate/orm/5.1/javadocs/
+https://docs.jboss.org/hibernate/orm/5.1/topical/html_single/
+https://docs.jboss.org/hibernate/orm/5.1/userguide/html_single/Hibernate_User_Guide.html

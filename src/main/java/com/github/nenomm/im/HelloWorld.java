@@ -1,6 +1,7 @@
 package com.github.nenomm.im;
 
-import com.github.nenomm.im.jdbc.sqlquery.AdvancedDao;
+import java.util.List;
+
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,8 @@ import com.github.nenomm.im.aop.PoorLittleObject;
 import com.github.nenomm.im.jdbc.namedparamjdbc.SomeDaoImproved;
 import com.github.nenomm.im.jdbc.simplejdbc.SomeDao;
 import com.github.nenomm.im.jdbc.simplejdbc.User;
+import com.github.nenomm.im.jdbc.sqlquery.AdvancedDao;
+import com.github.nenomm.im.orm.simplesetup.OneMoreDao;
 import com.github.nenomm.im.scopes.NeedyObject;
 import com.github.nenomm.im.scopes.TransientCollaborator;
 import com.github.nenomm.im.tx.MyService;
@@ -60,34 +63,40 @@ public class HelloWorld {
 			logger.info("running on linux");
 		}
 
-		ConfigurableApplicationContext validationContext = new ClassPathXmlApplicationContext(
-				new String[] { "validation.xml" });
-		validationTesting(validationContext);
-		conversionTesting(validationContext);
+		/*
+		 * ConfigurableApplicationContext validationContext = new ClassPathXmlApplicationContext(
+		 * new String[] { "validation.xml" });
+		 * validationTesting(validationContext);
+		 * conversionTesting(validationContext);
+		 * 
+		 * ConfigurableApplicationContext scopesContext = new ClassPathXmlApplicationContext(
+		 * new String[] { "scopes.xml" });
+		 * scopesTesting(scopesContext);
+		 * 
+		 * ConfigurableApplicationContext aopContext = new ClassPathXmlApplicationContext(
+		 * new String[] { "aop.xml" });
+		 * aopTesting(aopContext);
+		 * 
+		 * ConfigurableApplicationContext txContext = new ClassPathXmlApplicationContext(
+		 * new String[] { "transactions.xml" });
+		 * txTesting(txContext);
+		 * 
+		 * ConfigurableApplicationContext simpleJdbcContext = new ClassPathXmlApplicationContext(
+		 * new String[] { "simple_jdbc.xml" });
+		 * simpleJdbcTesting(simpleJdbcContext);
+		 * 
+		 * ConfigurableApplicationContext namedJdbcTesting = new ClassPathXmlApplicationContext(
+		 * new String[] { "named_jdbc.xml" });
+		 * namedJdbcTesting(namedJdbcTesting);
+		 * 
+		 * ConfigurableApplicationContext advancedQueryTesting = new ClassPathXmlApplicationContext(
+		 * new String[] { "advanced_query.xml" });
+		 * advancedQueryTesting(advancedQueryTesting);
+		 */
 
-		ConfigurableApplicationContext scopesContext = new ClassPathXmlApplicationContext(
-				new String[] { "scopes.xml" });
-		scopesTesting(scopesContext);
-
-		ConfigurableApplicationContext aopContext = new ClassPathXmlApplicationContext(
-				new String[] { "aop.xml" });
-		aopTesting(aopContext);
-
-		ConfigurableApplicationContext txContext = new ClassPathXmlApplicationContext(
-				new String[] { "transactions.xml" });
-		txTesting(txContext);
-
-		ConfigurableApplicationContext simpleJdbcContext = new ClassPathXmlApplicationContext(
-				new String[] { "simple_jdbc.xml" });
-		simpleJdbcTesting(simpleJdbcContext);
-
-		ConfigurableApplicationContext namedJdbcTesting = new ClassPathXmlApplicationContext(
-				new String[] { "named_jdbc.xml" });
-		namedJdbcTesting(namedJdbcTesting);
-
-		ConfigurableApplicationContext advancedQueryTesting = new ClassPathXmlApplicationContext(
-				new String[] { "advanced_query.xml" });
-		advancedQueryTesting(advancedQueryTesting);
+		ConfigurableApplicationContext simpleOrmTesting = new ClassPathXmlApplicationContext(
+				new String[] { "classpath:orm/simple_setup.xml" });
+		simpleOrmTesting(simpleOrmTesting);
 	}
 
 	private static void validationTesting(ConfigurableApplicationContext context) {
@@ -173,6 +182,12 @@ public class HelloWorld {
 	private static void advancedQueryTesting(ConfigurableApplicationContext context) {
 		AdvancedDao advancedDao = (AdvancedDao) context.getBean("advancedDao");
 		advancedDao.getUserName(2);
+	}
+
+	private static void simpleOrmTesting(ConfigurableApplicationContext context) {
+		OneMoreDao oneMoreDao = (OneMoreDao) context.getBean("oneMoreDao");
+		List result = oneMoreDao.findUsers();
+		assert !result.isEmpty();
 	}
 
 }
