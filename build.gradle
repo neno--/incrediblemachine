@@ -41,6 +41,9 @@ dependencies {
     compile "org.springframework:spring-orm:4.3.7.RELEASE"
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.1.5.Final'
 
+    // object to/from xml mapping support
+    compile "org.springframework:spring-oxm:4.3.7.RELEASE"
+    compile group: 'org.codehaus.castor', name: 'castor-xml', version: '1.4.1'
 }
 
 jar {

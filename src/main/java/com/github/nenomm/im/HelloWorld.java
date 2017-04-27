@@ -1,7 +1,9 @@
 package com.github.nenomm.im;
 
+import java.io.IOException;
 import java.util.List;
 
+import com.github.nenomm.im.oxm.SettingsConsumer;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,11 +94,15 @@ public class HelloWorld {
 		 * ConfigurableApplicationContext advancedQueryTesting = new ClassPathXmlApplicationContext(
 		 * new String[] { "advanced_query.xml" });
 		 * advancedQueryTesting(advancedQueryTesting);
+		 *
+		 * ConfigurableApplicationContext simpleOrmTesting = new ClassPathXmlApplicationContext(
+		 * new String[] { "classpath:orm/simple_setup.xml" });
+		 * simpleOrmTesting(simpleOrmTesting);
 		 */
 
-		ConfigurableApplicationContext simpleOrmTesting = new ClassPathXmlApplicationContext(
-				new String[] { "classpath:orm/simple_setup.xml" });
-		simpleOrmTesting(simpleOrmTesting);
+		ConfigurableApplicationContext simpleOxmTesting = new ClassPathXmlApplicationContext(
+				new String[] { "classpath:oxm.xml" });
+		simpleOxmTesting(simpleOxmTesting);
 	}
 
 	private static void validationTesting(ConfigurableApplicationContext context) {
@@ -188,6 +194,16 @@ public class HelloWorld {
 		OneMoreDao oneMoreDao = (OneMoreDao) context.getBean("oneMoreDao");
 		List result = oneMoreDao.findUsers();
 		assert !result.isEmpty();
+	}
+
+	private static void simpleOxmTesting(ConfigurableApplicationContext context) {
+		SettingsConsumer settingsConsumer = (SettingsConsumer) context.getBean("settingsConsumer");
+		try {
+			settingsConsumer.saveSettings();
+			settingsConsumer.loadSettings();
+		} catch (IOException e) {
+			logger.warn("Ooops:", e);
+		}
 	}
 
 }
