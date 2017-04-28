@@ -12,14 +12,14 @@ import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.Unmarshaller;
 
 public class SettingsConsumer {
-	private static final String FILE_NAME = "someSettings.xml";
-	private static final String FILE_LOCATION = SettingsConsumer.class.getResource(".").getPath() + FILE_NAME;
+	private static final String FILE_PATH = SettingsConsumer.class.getResource(".").getPath();
 	private SomeSettings settings = new SomeSettings();
+	private String fileName;
 
-	@Resource(name = "castorMarshaller")
+	@Resource(name = "marshaller")
 	private Marshaller marshaller;
 
-	@Resource(name = "castorMarshaller")
+	@Resource(name = "marshaller")
 	private Unmarshaller unmarshaller;
 
 	public void setMarshaller(Marshaller marshaller) {
@@ -30,11 +30,15 @@ public class SettingsConsumer {
 		this.unmarshaller = unmarshaller;
 	}
 
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
 	public void saveSettings() throws IOException {
 		FileOutputStream os = null;
 
 		try {
-			os = new FileOutputStream(FILE_LOCATION);
+			os = new FileOutputStream(FILE_PATH + fileName);
 			this.marshaller.marshal(settings, new StreamResult(os));
 		}
 		finally {
@@ -47,7 +51,7 @@ public class SettingsConsumer {
 	public void loadSettings() throws IOException {
 		FileInputStream is = null;
 		try {
-			is = new FileInputStream(FILE_LOCATION);
+			is = new FileInputStream(FILE_PATH + fileName);
 			this.settings = (SomeSettings) this.unmarshaller.unmarshal(new StreamSource(is));
 		}
 		finally {

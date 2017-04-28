@@ -3,7 +3,6 @@ package com.github.nenomm.im;
 import java.io.IOException;
 import java.util.List;
 
-import com.github.nenomm.im.oxm.SettingsConsumer;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +23,7 @@ import com.github.nenomm.im.jdbc.simplejdbc.SomeDao;
 import com.github.nenomm.im.jdbc.simplejdbc.User;
 import com.github.nenomm.im.jdbc.sqlquery.AdvancedDao;
 import com.github.nenomm.im.orm.simplesetup.OneMoreDao;
+import com.github.nenomm.im.oxm.SettingsConsumer;
 import com.github.nenomm.im.scopes.NeedyObject;
 import com.github.nenomm.im.scopes.TransientCollaborator;
 import com.github.nenomm.im.tx.MyService;
@@ -101,8 +101,13 @@ public class HelloWorld {
 		 */
 
 		ConfigurableApplicationContext simpleOxmTesting = new ClassPathXmlApplicationContext(
-				new String[] { "classpath:oxm.xml" });
-		simpleOxmTesting(simpleOxmTesting);
+				new String[] { "classpath:oxm/oxm.xml" });
+		oxmTesting(simpleOxmTesting, "settingsConsumer");
+
+		ConfigurableApplicationContext outOfTheBoxOxmTesting = new ClassPathXmlApplicationContext(
+				new String[] { "classpath:oxm/oxm_spring_way.xml" });
+		oxmTesting(outOfTheBoxOxmTesting, "settingsConsumerSpringWay");
+
 	}
 
 	private static void validationTesting(ConfigurableApplicationContext context) {
@@ -196,14 +201,14 @@ public class HelloWorld {
 		assert !result.isEmpty();
 	}
 
-	private static void simpleOxmTesting(ConfigurableApplicationContext context) {
-		SettingsConsumer settingsConsumer = (SettingsConsumer) context.getBean("settingsConsumer");
+	private static void oxmTesting(ConfigurableApplicationContext context, String beanName) {
+		SettingsConsumer settingsConsumer = (SettingsConsumer) context.getBean(beanName);
 		try {
 			settingsConsumer.saveSettings();
 			settingsConsumer.loadSettings();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			logger.warn("Ooops:", e);
 		}
 	}
-
 }

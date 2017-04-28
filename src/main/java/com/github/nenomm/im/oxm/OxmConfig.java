@@ -9,11 +9,13 @@ public class OxmConfig {
 
 	@Bean
 	public SettingsConsumer settingsConsumer() {
-		return new SettingsConsumer();
+		SettingsConsumer settingsConsumer = new SettingsConsumer();
+		settingsConsumer.setFileName("defaultWay.xml");
+		return settingsConsumer;
 	}
 
 	@Bean
-	public CastorMarshaller castorMarshaller() {
+	public CastorMarshaller marshaller() {
 		CastorMarshaller castorMarshaller = new CastorMarshaller();
 		castorMarshaller.setTargetClass(SomeSettings.class);
 		castorMarshaller.setUseXSITypeAtRoot(true);
