@@ -44,7 +44,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="newGreeter" class="com.github.nenomm.im.Greeter" scope="prototype">
     </bean>
 
-    <bean id="talkerWithDifferentGreaters" class="com.github.nenomm.im.Talker">
+    <bean id="talkerWithDifferentGreeters" class="com.github.nenomm.im.Talker">
         <lookup-method name="createNewGreeterEveryTime" bean="newGreeter"/>
     </bean>
 
