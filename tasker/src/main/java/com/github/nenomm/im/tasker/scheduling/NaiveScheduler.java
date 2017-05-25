@@ -4,12 +4,16 @@ import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
 
 public class NaiveScheduler {
 	static Logger logger = LoggerFactory.getLogger(NaiveScheduler.class);
 
 	private TaskScheduler taskScheduler;
+
+	@Autowired
+	private AnnotatedTask annotatedTask;
 
 	public void setTaskScheduler(TaskScheduler taskScheduler) {
 		this.taskScheduler = taskScheduler;
@@ -29,8 +33,9 @@ public class NaiveScheduler {
 
 	public void fireUp() {
 		logger.info("Registering tasks...");
-		registerForOneTime(new SimpleScheduledTask("TaskOne"), (new DateTime()).plusSeconds(10));
-		registerWithFixedDelay(new SimpleScheduledTask("TaskTwo"), Duration.standardSeconds(60));
-		registerCustomSchedule(new SimpleScheduledTask("TaskThree"));
+		// registerForOneTime(new SimpleScheduledTask("TaskOne"), (new DateTime()).plusSeconds(10));
+		// registerWithFixedDelay(new SimpleScheduledTask("TaskTwo"), Duration.standardSeconds(60));
+		// registerCustomSchedule(new SimpleScheduledTask("TaskThree"));
+		annotatedTask.returnSomething(34);
 	}
 }
