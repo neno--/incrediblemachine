@@ -4,6 +4,9 @@
 *.iws
 .idea/
 
+# Intellij build dir
+classes/
+
 #Gradle
 .gradletasknamecache
 .gradle/

@@ -11,7 +11,7 @@ public class Runner {
 				new String[] { "classpath:task.xml" });
 
 		SimpleTaskManager manager = (SimpleTaskManager) simpleTaskTesting.getBean("simpleTaskManager");
-		manager.printMessages();
+		// manager.printMessages();
 
 	}
 }

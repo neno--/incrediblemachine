@@ -5,12 +5,18 @@
 http://www.springframework.org/schema/beans/spring-beans.xsd" default-init-method="supercalifragilisticexpialidocious">
 
     <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-        <property name="corePoolSize" value="5" />
-        <property name="maxPoolSize" value="10" />
-        <property name="queueCapacity" value="5" />
+        <property name="corePoolSize" value="5"/>
+        <property name="maxPoolSize" value="10"/>
+        <property name="queueCapacity" value="5"/>
     </bean>
 
     <bean id="simpleTaskManager" class="com.github.nenomm.im.tasker.onetime.SimpleTaskManager">
-        <constructor-arg ref="taskExecutor" />
+        <constructor-arg ref="taskExecutor"/>
+    </bean>
+
+    <bean id="naiveScheduler" class="com.github.nenomm.im.tasker.scheduling.NaiveScheduler" init-method="fireUp">
+        <property name="taskScheduler">
+            <bean class="org.springframework.scheduling.concurrent.ConcurrentTaskScheduler"></bean>
+        </property>
     </bean>
 </beans>

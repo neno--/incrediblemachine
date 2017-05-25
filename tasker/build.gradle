@@ -13,6 +13,8 @@ dependencies {
     }
     compile "ch.qos.logback:logback-classic:1.2.2"
     compile "org.slf4j:jcl-over-slf4j:1.7.25"
+
+    compile "joda-time:joda-time:2.2"
 }
 
 jar {
