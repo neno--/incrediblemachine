@@ -15,6 +15,10 @@ dependencies {
     compile "org.slf4j:jcl-over-slf4j:1.7.25"
 
     compile "joda-time:joda-time:2.2"
+
+    compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
+    compile "org.springframework:spring-context-support:4.3.7.RELEASE"
+    compile "org.springframework:spring-tx:4.3.7.RELEASE"
 }
 
 jar {

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class AnnotatedTask {
 	static Logger logger = LoggerFactory.getLogger(AnnotatedTask.class);
 
-	@Scheduled(fixedDelay = 2000)
+	@Scheduled(fixedDelay = 60 * 1000)
 	public void doSomething() {
 		logger.info("There it blows...");
 	}
