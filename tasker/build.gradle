@@ -19,6 +19,9 @@ dependencies {
     compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
     compile "org.springframework:spring-context-support:4.3.7.RELEASE"
     compile "org.springframework:spring-tx:4.3.7.RELEASE"
+
+    compile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.4'
+    compile "org.springframework:spring-jdbc:4.3.7.RELEASE"
 }
 
 jar {

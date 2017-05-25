@@ -21,18 +21,25 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
         <property name="repeatInterval" value="2000"/>
     </bean>
 
+
     <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="jobDetails">
-            <list>
-                <ref bean="simpleJobDetail"/>
-            </list>
-        </property>
-
         <property name="triggers">
             <list>
                 <ref bean="simpleTrigger"/>
             </list>
+        </property>
+    </bean>
+
+    <!-- when used in cluster environment should running tasks only on one node, there is datasource conf to achieve that -->
+    <bean id="clusterQuartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="schedulerName" value="clusterQuartzScheduler"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="quartzProperties">
+            <map>
+                <!-- entry key="org.quartz.jobStore.acquireTriggersWithinLock" value="true"/>
+                <entry key="org.quartz.jobStore.lockOnInsert" value="true"/ -->
+            </map>
         </property>
     </bean>
 
