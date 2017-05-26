@@ -1,13 +1,6 @@
-apply plugin: 'java'
-
-repositories {
-    mavenCentral()
-}
-
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-
 dependencies {
+    compile rootProject
+
     compile("org.springframework:spring-context:4.3.7.RELEASE") {
         exclude group: "commons-logging"
     }
@@ -28,7 +21,5 @@ jar {
     baseName = 'tasker'
     version = '0.1.0'
 }
-
-apply plugin: 'application'
 
 mainClassName = 'com.github.nenomm.im.tasker.Runner'

@@ -34,3 +34,11 @@ hibernate 5.1 resources
 https://docs.jboss.org/hibernate/orm/5.1/javadocs/
 https://docs.jboss.org/hibernate/orm/5.1/topical/html_single/
 https://docs.jboss.org/hibernate/orm/5.1/userguide/html_single/Hibernate_User_Guide.html
+
+Spring Framework Artifacts
+https://docs.spring.io/spring/docs/4.3.7.RELEASE/spring-framework-reference/htmlsingle/#dependency-management
+
+Gradle multi project build
+https://docs.gradle.org/current/userguide/intro_multi_project_builds.html
+https://docs.gradle.org/current/userguide/multi_project_builds.html
+Watch for circular dependencies (when compiling) - https://discuss.gradle.org/t/gradle-support-for-cyclic-dependencies/14355/3

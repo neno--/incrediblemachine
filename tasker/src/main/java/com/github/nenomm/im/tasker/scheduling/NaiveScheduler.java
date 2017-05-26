@@ -1,11 +1,13 @@
 package com.github.nenomm.im.tasker.scheduling;
 
+import com.github.nenomm.im.tasker.SubprojectPojo;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
+import com.github.nenomm.im.MasterProjectPojo;
 
 public class NaiveScheduler {
 	static Logger logger = LoggerFactory.getLogger(NaiveScheduler.class);
@@ -38,4 +40,8 @@ public class NaiveScheduler {
 		// registerCustomSchedule(new SimpleScheduledTask("TaskThree"));
 		annotatedTask.returnSomething(34);
 	}
+
+	// this is just for testing dependencies
+	private MasterProjectPojo masterProjectPojo;
+	private SubprojectPojo subprojectPojo;
 }
