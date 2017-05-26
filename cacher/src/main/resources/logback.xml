@@ -9,8 +9,12 @@
         </filter>
     </appender>
 
+    <logger name="org.springframework" level="info"/>
+
     <root>
         <level value="DEBUG"/>
         <appender-ref ref="consoleAppender"/>
     </root>
+
+
 </configuration>

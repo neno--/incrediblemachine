@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class SomeDao {
+	static Logger logger = LoggerFactory.getLogger(SomeDao.class);
 	private JdbcTemplate jdbcTemplate;
 
 	// this is supposed to be a best practice, although jdbcTemplate is threadsafe and can be shared between DAOs
@@ -26,6 +29,8 @@ public class SomeDao {
 	}
 
 	public User findUser(long id) {
+		logger.info("Fetching user for id={}", id);
+
 		return jdbcTemplate.queryForObject(
 				"select name from users where id = ?",
 				new Object[] { id },

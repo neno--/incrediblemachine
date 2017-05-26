@@ -9,13 +9,33 @@ import com.github.nenomm.im.cacher.service.UserService;
 
 public class Runner {
 	static Logger logger = LoggerFactory.getLogger(Runner.class);
+	private UserService userService;
 
 	public static void main(String[] args) {
+		Runner runner = new Runner();
+		runner.doRun();
+
+	}
+
+	private void doRun() {
 		ConfigurableApplicationContext simpleCacheTesting = new ClassPathXmlApplicationContext(
 				new String[] { "classpath:cacher.xml" });
 
-		UserService userService = (UserService) simpleCacheTesting.getBean("userService");
-		logger.info("Got user: {}", userService.findUser(1).getName());
+		userService = (UserService) simpleCacheTesting.getBean("userService");
 
+		testNonCachedMethod();
+		testCachedMethod();
+	}
+
+	private void testNonCachedMethod() {
+		for (int i = 0; i < 10; i++) {
+			logger.info("Got user: {}", userService.findUser(1).getName());
+		}
+	}
+
+	private void testCachedMethod() {
+		for (int i = 0; i < 10; i++) {
+			logger.info("Got user: {}", userService.findCachedUser(2).getName());
+		}
 	}
 }
