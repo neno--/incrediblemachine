@@ -1,0 +1,22 @@
+dependencies {
+    compile rootProject
+
+    compile("org.springframework:spring-context:4.3.7.RELEASE") {
+        exclude group: "commons-logging"
+    }
+    compile "ch.qos.logback:logback-classic:1.2.2"
+    compile "org.slf4j:jcl-over-slf4j:1.7.25"
+
+    compile "org.springframework:spring-context-support:4.3.7.RELEASE"
+    compile "org.springframework:spring-tx:4.3.7.RELEASE"
+
+    compile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.4'
+    compile "org.springframework:spring-jdbc:4.3.7.RELEASE"
+}
+
+jar {
+    baseName = 'cacher'
+    version = '0.1.0'
+}
+
+mainClassName = 'com.github.nenomm.im.cacher.Runner'
