@@ -35,7 +35,7 @@ public class Runner {
 
 	private void testCachedMethod() {
 		for (int i = 0; i < 10; i++) {
-			logger.info("Got user: {}", userService.findCachedUser((i % 4) + 1).getName());
+			logger.info("[cached] Got user: {}", userService.findCachedUser((i % 4) + 1).getName());
 		}
 	}
 }

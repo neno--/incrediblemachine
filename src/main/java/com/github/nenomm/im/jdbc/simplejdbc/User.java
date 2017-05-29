@@ -1,6 +1,8 @@
 package com.github.nenomm.im.jdbc.simplejdbc;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 	private String name;
 
 	public String getName() {

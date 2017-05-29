@@ -17,6 +17,7 @@ dependencies {
     compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.4'
 
     compile "org.springframework:spring-context-support:4.3.7.RELEASE"
+    compile group: 'net.sf.ehcache', name: 'ehcache-jgroupsreplication', version: '1.7'
 }
 
 jar {

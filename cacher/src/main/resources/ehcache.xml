@@ -16,9 +16,24 @@
             memoryStoreEvictionPolicy='LRU'>
     </defaultCache>
 
-    <cache name='users'
-           maxElementsInMemory='1000'
-           eternal='true'>
+    <cache name="users"
+           maxElementsInMemory="1"
+           eternal="true"
+           overflowToDisk="true">
+        <cacheEventListenerFactory
+                class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+                properties="replicateAsynchronously=true"/>
     </cache>
+
+    <cacheManagerPeerProviderFactory
+            class="net.sf.ehcache.distribution.jgroups.JGroupsCacheManagerPeerProviderFactory"
+            properties="connect=TCP(bind_port=7800):
+    TCPPING(initial_hosts=localhost[7800],localhost[7801];port_range=10;timeout=3000;
+    num_initial_members=3):
+    VERIFY_SUSPECT(timeout=1500):
+    pbcast.NAKACK(retransmit_timeout=3000):
+    pbcast.GMS(join_timeout=50000;print_local_addr=true)"
+            propertySeparator="::"/>
+
 
 </ehcache>
