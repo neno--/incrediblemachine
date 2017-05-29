@@ -4,9 +4,11 @@ import javax.sql.DataSource;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -32,8 +34,14 @@ public class CacherConfig {
 		return new SomeDao();
 	}
 
-	@Bean
+/*	@Bean
 	public CacheManager cacheManager() {
-		return new ConcurrentMapCacheManager();
-	}
+		EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
+		ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource("ehcache.xml"));
+
+		EhCacheCacheManager ehCacheCacheManager = new EhCacheCacheManager();
+		ehCacheCacheManager.setCacheManager(ehCacheManagerFactoryBean.getObject());
+
+		return ehCacheCacheManager;
+	}*/
 }

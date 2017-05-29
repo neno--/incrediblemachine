@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans.xsd" default-init-method="supercalifragilisticexpialidocious">
+http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <import resource="quartz.xml"></import>
+    <import resource="datasource.xml"></import>
 
     <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-        <property name="corePoolSize" value="5" />
-        <property name="maxPoolSize" value="10" />
-        <property name="queueCapacity" value="5" />
+        <property name="corePoolSize" value="5"/>
+        <property name="maxPoolSize" value="10"/>
+        <property name="queueCapacity" value="5"/>
     </bean>
 
     <bean id="simpleTaskManager" class="com.github.nenomm.im.tasker.onetime.SimpleTaskManager">
-        <constructor-arg ref="taskExecutor" />
+        <constructor-arg ref="taskExecutor"/>
+    </bean>
+
+    <bean id="naiveScheduler" class="com.github.nenomm.im.tasker.scheduling.NaiveScheduler" init-method="fireUp">
+        <property name="taskScheduler">
+            <bean class="org.springframework.scheduling.concurrent.ConcurrentTaskScheduler"></bean>
+        </property>
+    </bean>
+
+    <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
+    <task:executor id="myExecutor" pool-size="5"/>
+    <task:scheduler id="myScheduler" pool-size="10"/>
+
+    <context:component-scan base-package="com.github.nenomm.im.tasker.scheduling"/>
+
+    <!--just a dependencie test-->
+    <bean id="masterProjectPojo" class="com.github.nenomm.im.MasterProjectPojo">
     </bean>
 </beans>

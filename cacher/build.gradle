@@ -12,6 +12,11 @@ dependencies {
 
     compile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.4'
     compile "org.springframework:spring-jdbc:4.3.7.RELEASE"
+
+    //compile group: 'org.ehcache', name: 'ehcache', version: '3.3.1'
+    compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.4'
+
+    compile "org.springframework:spring-context-support:4.3.7.RELEASE"
 }
 
 jar {
