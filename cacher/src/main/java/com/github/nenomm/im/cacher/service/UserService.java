@@ -1,6 +1,7 @@
 package com.github.nenomm.im.cacher.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.github.nenomm.im.jdbc.simplejdbc.SomeDao;
@@ -15,6 +16,7 @@ public class UserService {
 		return someDao.findUser(id);
 	}
 
+	@Cacheable("users")
 	public User findCachedUser(long id) {
 		return someDao.findUser(id);
 	}
